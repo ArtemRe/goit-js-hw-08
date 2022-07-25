@@ -14,20 +14,20 @@ function onSubmit(e) {
     userData[email] = value;
   });
   e.target.reset();
-  storage.remove('input_data');
+  storage.remove('feedback-form-state');
 }
 
 form.addEventListener('input', throttle(onInput, 300));
 
 function onInput(e) {
-  let saveData = storage.load('input_data');
+  let saveData = storage.load('feedback-form-state');
   saveData = saveData ? saveData : {};
   saveData[e.target.name] = e.target.value;
-  storage.save('input_data', saveData);
+  storage.save('feedback-form-state', saveData);
 }
 
 function unitForm() {
-  const saveData = storage.load('input_data');
+  const saveData = storage.load('feedback-form-state');
   if (saveData) {
     Object.entries(saveData).forEach(([name, value]) => {
       form.elements[name].value = value;
